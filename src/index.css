@@ -1,5 +1,14 @@
 body {
+    margin: 1rem;
     font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+.row {
+    display: flex;
+}
+
+.row > * {
+    flex: 1;
 }
 
 div + * {
@@ -8,4 +17,27 @@ div + * {
 
 .input--tiger {
     margin-bottom: 1rem;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.modal-inner {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+ul {
+    padding-left: 1rem;
 }

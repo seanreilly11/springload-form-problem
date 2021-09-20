@@ -9,6 +9,7 @@ import {
     Checkbox,
     Button,
 } from "@mui/material";
+import Modal from "./Modal";
 
 const Form: React.FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -16,6 +17,7 @@ const Form: React.FC = () => {
     const [colour, setColour] = useState<string>("blue");
     const [animals, setAnimals] = useState<string[]>([]);
     const [tiger, setTiger] = useState<string>("");
+    const [submit, setSubmit] = useState<boolean>(false);
 
     const handleCheck = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { name } = e.target;
@@ -30,113 +32,124 @@ const Form: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        console.log(true);
+        setSubmit(true);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <TextField
-                    type="email"
-                    label="Email"
-                    size="small"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div>
-                <TextField
-                    type="password"
-                    label="Password"
-                    inputProps={{ minLength: 8 }}
-                    size="small"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <div>
-                <TextField
-                    select
-                    label="Colour"
-                    size="small"
-                    value={colour}
-                    onChange={(e) => setColour(e.target.value)}
-                >
-                    <MenuItem value="blue">Blue</MenuItem>
-                    <MenuItem value="green">Green</MenuItem>
-                    <MenuItem value="red">Red</MenuItem>
-                    <MenuItem value="black">Black</MenuItem>
-                    <MenuItem value="brown">Brown</MenuItem>
-                </TextField>
-            </div>
-            <div>
-                <FormControl
-                    sx={{ m: 1 }}
-                    component="fieldset"
-                    variant="standard"
-                >
-                    <FormLabel component="legend">Animal</FormLabel>
-                    <FormGroup>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    name="bear"
-                                    checked={animals.includes("bear")}
-                                    onChange={handleCheck}
-                                />
-                            }
-                            label="Bear"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    name="tiger"
-                                    checked={animals.includes("tiger")}
-                                    onChange={handleCheck}
-                                />
-                            }
-                            label="Tiger"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    name="snake"
-                                    checked={animals.includes("snake")}
-                                    onChange={handleCheck}
-                                />
-                            }
-                            label="Snake"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    name="donkey"
-                                    checked={animals.includes("donkey")}
-                                    onChange={handleCheck}
-                                />
-                            }
-                            label="Donkey"
-                        />
-                    </FormGroup>
-                </FormControl>
-            </div>
-
-            {animals.includes("tiger") && (
-                <div className="input--tiger">
+        <div className="row">
+            <form onSubmit={handleSubmit}>
+                <div>
                     <TextField
                         type="email"
-                        label="Type of tiger"
-                        value={tiger}
+                        label="Email"
                         size="small"
-                        required
-                        onChange={(e) => setTiger(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
+                <div>
+                    <TextField
+                        type="password"
+                        label="Password"
+                        inputProps={{ minLength: 8 }}
+                        size="small"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <TextField
+                        select
+                        label="Colour"
+                        size="small"
+                        value={colour}
+                        onChange={(e) => setColour(e.target.value)}
+                    >
+                        <MenuItem value="blue">Blue</MenuItem>
+                        <MenuItem value="green">Green</MenuItem>
+                        <MenuItem value="red">Red</MenuItem>
+                        <MenuItem value="black">Black</MenuItem>
+                        <MenuItem value="brown">Brown</MenuItem>
+                    </TextField>
+                </div>
+                <div>
+                    <FormControl
+                        sx={{ m: 1 }}
+                        component="fieldset"
+                        variant="standard"
+                    >
+                        <FormLabel component="legend">Animal</FormLabel>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="bear"
+                                        checked={animals.includes("bear")}
+                                        onChange={handleCheck}
+                                    />
+                                }
+                                label="Bear"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="tiger"
+                                        checked={animals.includes("tiger")}
+                                        onChange={handleCheck}
+                                    />
+                                }
+                                label="Tiger"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="snake"
+                                        checked={animals.includes("snake")}
+                                        onChange={handleCheck}
+                                    />
+                                }
+                                label="Snake"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="donkey"
+                                        checked={animals.includes("donkey")}
+                                        onChange={handleCheck}
+                                    />
+                                }
+                                label="Donkey"
+                            />
+                        </FormGroup>
+                    </FormControl>
+                </div>
+
+                {animals.includes("tiger") && (
+                    <div className="input--tiger">
+                        <TextField
+                            label="Type of tiger"
+                            value={tiger}
+                            size="small"
+                            required
+                            onChange={(e) => setTiger(e.target.value)}
+                        />
+                    </div>
+                )}
+                <Button variant="contained" type="submit">
+                    Submit
+                </Button>
+            </form>
+            {submit && (
+                <Modal
+                    email={email}
+                    password={password}
+                    colour={colour}
+                    animals={animals}
+                    tiger={tiger}
+                    setSubmit={setSubmit}
+                />
             )}
-            <Button variant="contained" type="submit">
-                Submit
-            </Button>
-        </form>
+        </div>
     );
 };
 
