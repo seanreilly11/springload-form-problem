@@ -7,6 +7,7 @@ import {
     FormGroup,
     FormControlLabel,
     Checkbox,
+    Button,
 } from "@mui/material";
 
 const Form: React.FC = () => {
@@ -47,6 +48,7 @@ const Form: React.FC = () => {
                 <TextField
                     type="password"
                     label="Password"
+                    inputProps={{ minLength: 8 }}
                     size="small"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -67,67 +69,73 @@ const Form: React.FC = () => {
                     <MenuItem value="brown">Brown</MenuItem>
                 </TextField>
             </div>
-
-            <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
-                <FormLabel component="legend">Animal</FormLabel>
-                <FormGroup>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="bear"
-                                checked={animals.includes("bear")}
-                                onChange={handleCheck}
-                            />
-                        }
-                        label="Bear"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="tiger"
-                                checked={animals.includes("tiger")}
-                                onChange={handleCheck}
-                            />
-                        }
-                        label="Tiger"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="snake"
-                                checked={animals.includes("snake")}
-                                onChange={handleCheck}
-                            />
-                        }
-                        label="Snake"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="donkey"
-                                checked={animals.includes("donkey")}
-                                onChange={handleCheck}
-                            />
-                        }
-                        label="Donkey"
-                    />
-                </FormGroup>
-            </FormControl>
+            <div>
+                <FormControl
+                    sx={{ m: 1 }}
+                    component="fieldset"
+                    variant="standard"
+                >
+                    <FormLabel component="legend">Animal</FormLabel>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name="bear"
+                                    checked={animals.includes("bear")}
+                                    onChange={handleCheck}
+                                />
+                            }
+                            label="Bear"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name="tiger"
+                                    checked={animals.includes("tiger")}
+                                    onChange={handleCheck}
+                                />
+                            }
+                            label="Tiger"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name="snake"
+                                    checked={animals.includes("snake")}
+                                    onChange={handleCheck}
+                                />
+                            }
+                            label="Snake"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name="donkey"
+                                    checked={animals.includes("donkey")}
+                                    onChange={handleCheck}
+                                />
+                            }
+                            label="Donkey"
+                        />
+                    </FormGroup>
+                </FormControl>
+            </div>
 
             {animals.includes("tiger") && (
-                <div>
-                    <label>
-                        Type of tiger:{" "}
-                        <input
-                            type="email"
-                            value={tiger}
-                            required
-                            onChange={(e) => setTiger(e.target.value)}
-                        />
-                    </label>
+                <div className="input--tiger">
+                    <TextField
+                        type="email"
+                        label="Type of tiger"
+                        value={tiger}
+                        size="small"
+                        required
+                        onChange={(e) => setTiger(e.target.value)}
+                    />
                 </div>
             )}
-            <button type="submit">Submit</button>
+            <Button variant="contained" type="submit">
+                Submit
+            </Button>
         </form>
     );
 };

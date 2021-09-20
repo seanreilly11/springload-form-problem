@@ -5,3 +5,7 @@ body {
 div + * {
     margin-top: 1rem;
 }
+
+.input--tiger {
+    margin-bottom: 1rem;
+}
