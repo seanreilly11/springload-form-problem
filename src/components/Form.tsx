@@ -1,4 +1,13 @@
 import React, { useState } from "react";
+import {
+    TextField,
+    MenuItem,
+    FormControl,
+    FormLabel,
+    FormGroup,
+    FormControlLabel,
+    Checkbox,
+} from "@mui/material";
 
 const Form: React.FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -26,77 +35,85 @@ const Form: React.FC = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>
-                    Email:{" "}
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                <TextField
+                    type="email"
+                    label="Email"
+                    size="small"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </div>
+            <div>
+                <TextField
+                    type="password"
+                    label="Password"
+                    size="small"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+            <div>
+                <TextField
+                    select
+                    label="Colour"
+                    size="small"
+                    value={colour}
+                    onChange={(e) => setColour(e.target.value)}
+                >
+                    <MenuItem value="blue">Blue</MenuItem>
+                    <MenuItem value="green">Green</MenuItem>
+                    <MenuItem value="red">Red</MenuItem>
+                    <MenuItem value="black">Black</MenuItem>
+                    <MenuItem value="brown">Brown</MenuItem>
+                </TextField>
+            </div>
+
+            <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
+                <FormLabel component="legend">Animal</FormLabel>
+                <FormGroup>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="bear"
+                                checked={animals.includes("bear")}
+                                onChange={handleCheck}
+                            />
+                        }
+                        label="Bear"
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Password:{" "}
-                    <input
-                        type="password"
-                        minLength={8}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="tiger"
+                                checked={animals.includes("tiger")}
+                                onChange={handleCheck}
+                            />
+                        }
+                        label="Tiger"
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Colour:{" "}
-                    <select
-                        value={colour}
-                        onChange={(e) => setColour(e.target.value)}
-                    >
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="red">Red</option>
-                        <option value="black">Black</option>
-                        <option value="brown">Brown</option>
-                    </select>
-                </label>
-            </div>
-            <div>
-                <label>Animal:</label>
-                <br />
-                <label htmlFor="bear">Bear</label>
-                <input
-                    type="checkbox"
-                    id="bear"
-                    name="bear"
-                    checked={animals.includes("bear")}
-                    onChange={handleCheck}
-                />
-                <label htmlFor="tiger">Tiger</label>
-                <input
-                    type="checkbox"
-                    id="tiger"
-                    name="tiger"
-                    checked={animals.includes("tiger")}
-                    onChange={handleCheck}
-                />
-                <label htmlFor="snake">Snake</label>
-                <input
-                    type="checkbox"
-                    id="snake"
-                    name="snake"
-                    checked={animals.includes("snake")}
-                    onChange={handleCheck}
-                />
-                <label htmlFor="donkey">Donkey</label>
-                <input
-                    type="checkbox"
-                    id="donkey"
-                    name="donkey"
-                    checked={animals.includes("donkey")}
-                    onChange={handleCheck}
-                />
-            </div>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="snake"
+                                checked={animals.includes("snake")}
+                                onChange={handleCheck}
+                            />
+                        }
+                        label="Snake"
+                    />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="donkey"
+                                checked={animals.includes("donkey")}
+                                onChange={handleCheck}
+                            />
+                        }
+                        label="Donkey"
+                    />
+                </FormGroup>
+            </FormControl>
+
             {animals.includes("tiger") && (
                 <div>
                     <label>
